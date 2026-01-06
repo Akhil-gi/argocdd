@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-deploy
+spec:
+  destination:
+    namespace: opsmx-argo
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: sampledeployment
+    repoURL: git@github.com:OpsMx/argo-sample-apps.git
+    targetRevision: HEAD
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
